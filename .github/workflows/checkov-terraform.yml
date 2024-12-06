@@ -27,23 +27,18 @@ jobs:
           checkov
           checkov --help
 
-      - name: Criar diretorio /results para armazenar os resultados gerados com o Checkov
-        run: |
-          mkdir results
-
       - name: Executar analise com o Checkov
         run: |
           checkov -d ${{ env.TERRAFORM_DIRECTORY }} -o cli -o sarif --output-file-path ${{ env.RESULTS_TERRAFORM_ANALYSIS }}
 
-      - name: Exibir arquivos gerados em /results
+      - name: Exibir arquivos gerados apos execucao do Checkov
         run: |
-          cd results
           ls
         if: always()
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ./results/results-azure-terraform.sarif
+          sarif_file: ./results-azure-terraform.sarif
           category: checkov-terraform
         if: always()
