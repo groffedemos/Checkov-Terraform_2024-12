@@ -29,17 +29,16 @@ jobs:
 
       - name: Executar analise com o Checkov
         run: |
-          checkov -d ${{ env.TERRAFORM_DIRECTORY }} -o cli -o sarif --output-file-path results-azure-terraform.sarif
-
+          checkov -d ${{ env.TERRAFORM_DIRECTORY }} -o cli -o sarif --output-file-path ./
       - name: Exibir arquivos gerados apos execucao do Checkov
         run: |
           ls
-          cat results-azure-terraform.sarif
+          cat results_sarif.sarif
         if: always()
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ./results-azure-terraform.sarif
+          sarif_file: ./results_sarif.sarif
           category: checkov-terraform
         if: always()
