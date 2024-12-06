@@ -54,7 +54,7 @@ jobs:
 
       - name: Executar analise com o Checkov
         run: |
-          checkov -d ${{ env.TERRAFORM_DIRECTORY }} -o cli -o sarif --output-file-path ./results2
+          checkov -d ${{ env.TERRAFORM_DIRECTORY }} -o cli -o junitxml --output-file-path ./results2
         if: always()
 
       - name: Exibir arquivos gerados apos execucao do Checkov em /results2
@@ -63,9 +63,9 @@ jobs:
           ls
         if: always()
 
-      - name: Upload arquivo SARIF
-        uses: github/codeql-action/upload-sarif@v3
+      - name: Test Reporter (exibir resultados)
+        uses: dorny/test-reporter@v1.9.1
         with:
-          sarif_file: ./results2/results_sarif.sarif
-          category: docker-scout
+          name: checkov-analysis-junit
+          path: ./results2/results_junixml.xml
         if: always()
