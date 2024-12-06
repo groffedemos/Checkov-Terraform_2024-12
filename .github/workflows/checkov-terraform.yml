@@ -21,7 +21,7 @@ jobs:
         run: |
           pip install checkov
 
-      - name: Instalar o Checkov via pip
+      - name: Checar instalacao do Checkov
         run: |
           checkov
           checkov --help
