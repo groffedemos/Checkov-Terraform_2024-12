@@ -34,6 +34,7 @@ jobs:
       - name: Exibir arquivos gerados apos execucao do Checkov
         run: |
           ls
+          cat results-azure-terraform.sarif
         if: always()
 
       - name: Upload SARIF file
