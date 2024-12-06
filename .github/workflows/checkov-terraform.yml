@@ -68,5 +68,5 @@ jobs:
         with:
           name: checkov-analysis-junit
           reporter: java-junit
-          path: ./results2/results_junixml.xml
+          path: ./results2/results_junitxml.xml
         if: always()
