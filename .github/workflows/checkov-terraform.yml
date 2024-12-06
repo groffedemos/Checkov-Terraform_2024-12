@@ -29,7 +29,7 @@ jobs:
 
       - name: Executar analise com o Checkov
         run: |
-          checkov -d ${{ env.TERRAFORM_DIRECTORY }} -o cli -o sarif --output-file-path ${{ env.RESULTS_TERRAFORM_ANALYSIS }}
+          checkov -d ${{ env.TERRAFORM_DIRECTORY }} -o cli -o sarif --output-file-path ./results-azure-terraform.sarif
 
       - name: Exibir arquivos gerados apos execucao do Checkov
         run: |
