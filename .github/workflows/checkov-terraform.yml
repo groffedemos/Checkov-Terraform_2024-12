@@ -45,3 +45,4 @@ jobs:
           name: checkov-results
           title: Resultados Analise Checkov
           body-file: /results/results_github_failed_only.md
+        if: always()
