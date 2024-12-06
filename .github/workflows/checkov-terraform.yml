@@ -39,10 +39,33 @@ jobs:
           cd results
           ls
         if: always()
-      
+
       - uses: dtinth/markdown-report-action@v1
         with:
           name: checkov-results
           title: Resultados Analise Checkov
           body-file: ./results/results_github_failed_only.md
+        if: always()
+        
+      - name: Criar diretorio /results para armazenar os resultados gerados com o Checkov
+        run: |
+          mkdir results2
+        if: always()
+
+      - name: Executar analise com o Checkov
+        run: |
+          checkov -d ${{ env.TERRAFORM_DIRECTORY }} -o cli -o sarif --output-file-path ./results2
+        if: always()
+
+      - name: Exibir arquivos gerados apos execucao do Checkov em /results2
+        run: |
+          cd results
+          ls
+        if: always()
+
+      - name: Upload arquivo SARIF
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: scan-image.sarif
+          category: docker-scout
         if: always()
