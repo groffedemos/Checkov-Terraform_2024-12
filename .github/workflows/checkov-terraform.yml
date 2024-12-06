@@ -1,0 +1,42 @@
+name: checkov-terraform
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  TERRAFORM_DIRECTORY: './src'
+  RESULTS_TERRAFORM_ANALYSIS: './results/results-azure-terraform.sarif'
+
+jobs:
+  checkov-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar o Checkov via pip
+        run: |
+          pip install checkov
+
+      - name: Instalar o Checkov via pip
+        run: |
+          checkov
+          checkov --help
+
+      - name: Criar diretorio /results para armazenar os resultados gerados com o Checkov
+        run: |
+          mkdir results
+
+      - name: Executar analise com o Checkov
+        run: |
+          checkov -d $(terraformDirectory) -o cli -o sarif --output-file-path $(resultsTerraformAnalysis)
+
+      - name: Exibir arquivos gerados em /results
+        run: |
+          cd results
+          ls
+        if: always()
