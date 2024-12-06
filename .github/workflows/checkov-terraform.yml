@@ -59,13 +59,13 @@ jobs:
 
       - name: Exibir arquivos gerados apos execucao do Checkov em /results2
         run: |
-          cd results
+          cd results2
           ls
         if: always()
 
       - name: Upload arquivo SARIF
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: scan-image.sarif
+          sarif_file: ./results2/results_sarif.sarif
           category: docker-scout
         if: always()
