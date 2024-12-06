@@ -26,11 +26,6 @@ jobs:
           checkov
           checkov --help
 
-      - name: Instalar o Checkov via pip
-        run: |
-          checkov
-          checkov --help
-
       - name: Criar diretorio /results para armazenar os resultados gerados com o Checkov
         run: |
           mkdir results
