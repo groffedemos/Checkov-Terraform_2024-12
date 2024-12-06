@@ -44,3 +44,9 @@ jobs:
           cd results
           ls
         if: always()
+      
+      - uses: dtinth/markdown-report-action@v1
+        with:
+          name: checkov-results
+          title: Resultados Analise Checkov
+          body-file: /results/results_github_failed_only.md
