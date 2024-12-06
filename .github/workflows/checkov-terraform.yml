@@ -38,7 +38,6 @@ jobs:
         run: |
           cd results
           ls
-          echo 'Teste 123'
         if: always()
       
       - uses: dtinth/markdown-report-action@v1
